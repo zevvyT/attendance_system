@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <!-- Database connection settings -->
+        <property name="hibernate.connection.driver_class">com.microsoft.sqlserver.jdbc.SQLServerDriver</property>
+        <property name="hibernate.connection.url">jdbc:sqlserver://localhost:1433;databaseName=AttendanceDB;encrypt=false</property>
+        <property name="hibernate.connection.username">sa</property>
+        <property name="hibernate.connection.password">YourPassword123</property>
+
+        <!-- Connection pool settings (HikariCP) -->
+        <property name="hibernate.hikari.minimumIdle">5</property>
+        <property name="hibernate.hikari.maximumPoolSize">20</property>
+        <property name="hibernate.hikari.idleTimeout">300000</property>
+
+        <!-- SQL dialect -->
+        <property name="hibernate.dialect">org.hibernate.dialect.SQLServer2012Dialect</property>
+
+        <!-- Echo all executed SQL to stdout -->
+        <property name="hibernate.show_sql">true</property>
+        <property name="hibernate.format_sql">true</property>
+
+        <!-- Drop and re-create the database schema on startup -->
+        <!-- Change to 'update' for production -->
+        <property name="hibernate.hbm2ddl.auto">update</property>
+
+        <!-- Enable Hibernate's automatic session context management -->
+        <property name="hibernate.current_session_context_class">thread</property>
+
+        <!-- Disable the second-level cache -->
+        <property name="hibernate.cache.use_second_level_cache">false</property>
+
+        <!-- Entity mappings -->
+        <mapping class="com.attendance.model.Employee"/>
+        <mapping class="com.attendance.model.LeaveBalance"/>
+        <mapping class="com.attendance.model.AttendanceLog"/>
+        <mapping class="com.attendance.model.LeaveRequest"/>
+        <mapping class="com.attendance.model.OffSiteWork"/>
+    </session-factory>
+</hibernate-configuration>

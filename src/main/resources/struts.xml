@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+        "http://struts.apache.org/dtds/struts-2.5.dtd">
+<struts>
+    <!-- Development mode -->
+    <constant name="struts.devMode" value="true"/>
+    <constant name="struts.ui.theme" value="simple"/>
+    <constant name="struts.enable.DynamicMethodInvocation" value="false"/>
+    <constant name="struts.convention.default.parent.package" value="struts-default"/>
+
+    <package name="default" extends="struts-default">
+        <!-- Attendance Actions -->
+        <action name="signIn" class="com.attendance.action.AttendanceAction" method="signIn">
+            <result name="success" type="json"/>
+            <result name="error" type="json"/>
+        </action>
+
+        <action name="signOut" class="com.attendance.action.AttendanceAction" method="signOut">
+            <result name="success" type="json"/>
+            <result name="error" type="json"/>
+        </action>
+
+        <action name="viewHistory" class="com.attendance.action.AttendanceAction" method="viewHistory">
+            <result name="success">/jsp/attendance-history.jsp</result>
+        </action>
+
+        <!-- Leave Actions -->
+        <action name="submitLeave" class="com.attendance.action.LeaveAction" method="submitRequest">
+            <result name="success" type="json"/>
+            <result name="error" type="json"/>
+        </action>
+
+        <action name="approveLeave" class="com.attendance.action.LeaveAction" method="approveRequest">
+            <result name="success" type="json"/>
+            <result name="error" type="json"/>
+        </action>
+
+        <action name="viewLeaveBalance" class="com.attendance.action.LeaveAction" method="viewBalance">
+            <result name="success" type="json"/>
+        </action>
+
+        <!-- Dashboard Actions -->
+        <action name="employeeDashboard" class="com.attendance.action.DashboardAction" method="employeeDashboard">
+            <result name="success">/jsp/employee-dashboard.jsp</result>
+        </action>
+
+        <action name="managerDashboard" class="com.attendance.action.DashboardAction" method="managerDashboard">
+            <result name="success">/jsp/manager-dashboard.jsp</result>
+        </action>
+
+        <!-- Off-site Actions -->
+        <action name="registerOffSite" class="com.attendance.action.OffSiteAction" method="registerOffSite">
+            <result name="success" type="json"/>
+            <result name="error" type="json"/>
+        </action>
+    </package>
+</struts>
