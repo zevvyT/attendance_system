@@ -10,12 +10,12 @@ import java.time.LocalDate;
 import java.util.List;
 
 public class AttendanceLogDAO {
-    
+
     public AttendanceLog findByEmployeeAndDate(Long employeeId, LocalDate date) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             Query<AttendanceLog> query = session.createQuery(
-                "FROM AttendanceLog WHERE employee.employeeId = :employeeId AND date = :date", 
-                AttendanceLog.class);
+                    "FROM AttendanceLog WHERE employee.employeeId = :employeeId AND date = :date",
+                    AttendanceLog.class);
             query.setParameter("employeeId", employeeId);
             query.setParameter("date", date);
             return query.uniqueResult();
@@ -24,13 +24,13 @@ public class AttendanceLogDAO {
             return null;
         }
     }
-    
+
     public List<AttendanceLog> findByDateRange(Long employeeId, LocalDate startDate, LocalDate endDate) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             Query<AttendanceLog> query = session.createQuery(
-                "FROM AttendanceLog WHERE employee.employeeId = :employeeId " +
-                "AND date BETWEEN :startDate AND :endDate ORDER BY date DESC", 
-                AttendanceLog.class);
+                    "FROM AttendanceLog WHERE employee.employeeId = :employeeId " +
+                            "AND date BETWEEN :startDate AND :endDate ORDER BY date DESC",
+                    AttendanceLog.class);
             query.setParameter("employeeId", employeeId);
             query.setParameter("startDate", startDate);
             query.setParameter("endDate", endDate);
@@ -40,11 +40,11 @@ public class AttendanceLogDAO {
             return null;
         }
     }
-    
+
     public List<AttendanceLog> findAllByDate(LocalDate date) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             Query<AttendanceLog> query = session.createQuery(
-                "FROM AttendanceLog WHERE date = :date", AttendanceLog.class);
+                    "FROM AttendanceLog WHERE date = :date", AttendanceLog.class);
             query.setParameter("date", date);
             return query.list();
         } catch (Exception e) {
@@ -52,7 +52,18 @@ public class AttendanceLogDAO {
             return null;
         }
     }
-    
+
+    public List<AttendanceLog> getAllAttendanceLogs() {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            Query<AttendanceLog> query = session.createQuery(
+                    "FROM AttendanceLog ORDER BY date DESC, timeIn DESC", AttendanceLog.class);
+            return query.list();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     public boolean save(AttendanceLog log) {
         Transaction transaction = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
@@ -68,7 +79,7 @@ public class AttendanceLogDAO {
             return false;
         }
     }
-    
+
     public boolean update(AttendanceLog log) {
         Transaction transaction = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {

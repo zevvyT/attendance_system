@@ -6,9 +6,9 @@
     <session-factory>
         <!-- Database connection settings -->
         <property name="hibernate.connection.driver_class">com.microsoft.sqlserver.jdbc.SQLServerDriver</property>
-        <property name="hibernate.connection.url">jdbc:sqlserver://localhost:1433;databaseName=AttendanceDB;encrypt=false</property>
-        <property name="hibernate.connection.username">sa</property>
-        <property name="hibernate.connection.password">YourPassword123</property>
+        <property name="hibernate.connection.url">jdbc:sqlserver://localhost\SQLEXPRESS;databaseName=AttendanceDB;encrypt=false;trustServerCertificate=true</property>
+        <property name="hibernate.connection.username">attendance_app</property>
+        <property name="hibernate.connection.password">Attendance@2025!</property>
 
         <!-- Connection pool settings (HikariCP) -->
         <property name="hibernate.hikari.minimumIdle">5</property>
